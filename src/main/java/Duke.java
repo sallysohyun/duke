@@ -20,11 +20,27 @@ public class Duke
         System.out.println(lines);
 
         ArrayList<String> listed = new ArrayList<String>();
+        ArrayList<String> marking = new ArrayList<String>();
         String input = "nil";
 
         while(!input.equals("bye"))
         {
             input = scanner.nextLine();
+            String[] splitstring = input.split(" ");
+
+            if (splitstring[0].equals("done"))
+            {
+                int num = Integer.parseInt(splitstring[1]);
+                System.out.println(lines);
+                System.out.println("Nice! I've marked this task as done:");
+
+                for(int j=num; j<listed.size(); j++) {
+                    marking.set(num-1,"✓");
+                    System.out.println("[" + marking.get(num-1) + "] " + listed.get(num-1));
+                }
+                System.out.println(lines);
+                continue;
+            }
             if(input.equals("bye"))
             {
                 System.out.println(lines);
@@ -38,7 +54,7 @@ public class Duke
                 System.out.println(lines);
                 for(int j=0; j<arraysize; j++)
                 {
-                    System.out.println((j+1) + ". " + listed.get(j));
+                    System.out.println((j+1) + ". [" + marking.get(j) +"] "+listed.get(j));
                 }
                 System.out.println(lines);
 
@@ -46,6 +62,7 @@ public class Duke
             else
             {
                 listed.add(input);
+                marking.add("✗");
                 System.out.println(lines);
                 System.out.println("Added: " + input);
                 System.out.println(lines);
